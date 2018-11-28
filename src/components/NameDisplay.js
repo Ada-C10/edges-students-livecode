@@ -5,9 +5,21 @@ class NameDisplay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: 'this is the name set in the initial state',
+      name: 'Cowboy Ada',
       shouldDisplayName: true,
     };
+  }
+
+  onButtonClick = (event) => {
+    this.setState({
+      shouldDisplayName: !this.state.shouldDisplayName,
+    });
+  }
+
+  onNameChange = (event) => {
+    this.setState({
+      name: event.target.value,
+    });
   }
 
   render() {
@@ -18,7 +30,11 @@ class NameDisplay extends React.Component {
     }
 
     return (
-      <h2> { displayText } </h2>
+      <section>
+        <h2> { displayText } </h2>
+        <button onClick={ this.onButtonClick }>Click Me to Turn off Displaying Name</button>
+        <input type="text" onChange={ this.onNameChange } value={ this.state.name } />
+      </section>
     );
   }
 
