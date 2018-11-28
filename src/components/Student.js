@@ -2,22 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Student.css';
 
-const Student = (props) => {
+class Student extends React.Component {
 
-  const name = props.fullName;
+  constructor(props) {
+    super(props);
+  }
 
-  return (
-    <section className="student">
-      <h3>Student</h3>
-      <ul>
-        <li>Name: {name}</li>
-        <li>Email: {props.email}</li>
-        <li>Hometown: {props.hometown}</li>
-        <li>Class: {props.classroom}</li>
-      </ul>
-    </section>
-  )
-};
+  render() {
+
+    const name = this.props.fullName;
+
+    return (
+      <section className="student">
+        <h3>Student</h3>
+        <ul>
+          <li>Name: {name}</li>
+          <li>Email: {this.props.email}</li>
+          <li>Hometown: {this.props.hometown}</li>
+          <li>Class: {this.props.classroom}</li>
+        </ul>
+      </section>
+    )
+
+  }
+}
+
 
 Student.propTypes = {
   fullName: PropTypes.string.isRequired,
