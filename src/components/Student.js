@@ -19,11 +19,14 @@ const Student = (props) => {
   )
 };
 
-
 Student.propTypes = {
   fullName: PropTypes.string.isRequired,
   email: PropTypes.string,
 };
+
+Student.defaultProps = {
+  email: 'no email on file',
+}
 
 
 export default Student;

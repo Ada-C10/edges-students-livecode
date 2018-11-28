@@ -7,7 +7,6 @@ const StudentCollection = () => {
   const students = [
     {
       fullName: "Ada Lovelace",
-      email: "ada@lovelace.uk",
     },
     {
       fullName: "Katherine Johnson",
