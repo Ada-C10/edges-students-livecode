@@ -8,9 +8,15 @@ class Student extends React.Component {
     super(props);
   }
 
+  markPresentClickHandler = (e) => {
+    console.log("The Mark Present Button was clicked!");
+    this.props.markPresentCallback(this.props.index);
+  }
+
   render() {
 
     const name = this.props.fullName;
+    const presentText = this.props.isPresent ? "Present" : "Absent";
 
     return (
       <section className="student">
@@ -18,8 +24,14 @@ class Student extends React.Component {
         <ul>
           <li>Name: {name}</li>
           <li>Email: {this.props.email}</li>
-          <li>Hometown: {this.props.hometown}</li>
-          <li>Class: {this.props.classroom}</li>
+          <div>
+            { presentText } today
+            <button
+              disabled={ this.props.isPresent }
+              onClick={ this.markPresentClickHandler } >
+              Mark Present
+            </button>
+          </div>
         </ul>
       </section>
     )

@@ -14,25 +14,44 @@ class StudentCollection extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      students: [
+        {
+          fullName: "Ada Lovelace",
+          isPresentToday: true,
+        },
+        {
+          fullName: "Katherine Johnson",
+          email: "kat@nasa.gov",
+          isPresentToday: false,
+        }
+      ]
+    }
   }
 
-  setupRendering() {
-    return [
-      {
-        fullName: "Ada Lovelace",
-      },
-      {
-        fullName: "Katherine Johnson",
-        email: "kat@nasa.gov",
-      }
-    ];
+  // We want a callback in the StudentCollection component that fires when "something happened in the Student Component" ... aka "when Student Component says 'I totally clicked the Mark Present Button'"
+  aSpecificStudentWasMarkedPresentButIamTheStudentCollection = (studentIndex) => {
+    console.log(`A specific student of ID ${studentIndex} had its marked present button clicked, and now I'm in the student collection component`);
+
+    let updatedStudentData = this.state.students;
+    updatedStudentData[studentIndex].isPresentToday = true;
+
+    this.setState({
+      students: updatedStudentData
+    })
   }
 
   render() {
-    const students = this.setupRendering();
+    const students = this.state.students;
 
     const studentCollection = students.map((student, i) => {
-      return <Student key={i} fullName={student.fullName} email={student.email} />
+      return <Student
+        key={i}
+        index={i}
+        fullName={student.fullName}
+        email={student.email}
+        isPresent={student.isPresentToday}
+        markPresentCallback={ this.aSpecificStudentWasMarkedPresentButIamTheStudentCollection } />
     });
 
     const header = "header";
