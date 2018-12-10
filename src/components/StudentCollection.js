@@ -42,6 +42,12 @@ class StudentCollection extends React.Component {
     })
   }
 
+  addStudent = (newStudent) => {
+    const students = this.state.students;
+    students.push(newStudent);
+    this.setState({students: students});
+  }
+
   render() {
     const students = this.state.students;
 
@@ -61,7 +67,7 @@ class StudentCollection extends React.Component {
 
     return (
       <section>
-        <NewStudentForm />
+        <NewStudentForm addStudentCallback={this.addStudent}/>
 
         <h2 className={header + " " + headerColor}>Students</h2>
         <ul>

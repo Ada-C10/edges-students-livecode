@@ -11,19 +11,40 @@ class NewStudentForm extends Component {
     }
   }
 
-  onNameChange = (event) => {
-    console.log("Name was changed", event);
-    this.setState({fullName: event.target.value})
+  onNameChange = (fishtaco) => {
+    console.log("Name was changed", fishtaco, fishtaco.target);
+    this.setState({fullName: fishtaco.target.value})
   }
 
   onEmailChange = (event) => {
     this.setState({email: event.target.value})
   }
 
+  onFormSubmit = (event) => {
+    event.preventDefault();
+
+    const newStudent = {
+      fullName: this.state.fullName,
+      email: this.state.email,
+    };
+
+    this.setState({
+      fullName: '',
+      email: '',
+    });
+
+    // Now we need to do something with the student...
+    console.log("Created a new student:", newStudent);
+    this.props.addStudentCallback(newStudent);
+  }
+
   render() {
     return (
       <div>
-        <form className="new-student-form">
+        <form
+          className="new-student-form"
+          onSubmit={this.onFormSubmit}
+          >
           <div>
             <label htmlFor="fullName">Name:</label>
             <input
@@ -43,7 +64,7 @@ class NewStudentForm extends Component {
           <input
             type="submit"
             value="Add Student"
-          />
+            />
         </form>
       </div>
     );
