@@ -1,6 +1,7 @@
 import React from 'react';
 import './StudentCollection.css';
 import Student from './Student';
+import NewStudentForm from './NewStudentForm';
 
 // Check the syntax! It's a class, and it inherits from Component (make sure I'm importing the right things so that Component is being accessed correctly)
 
@@ -60,6 +61,8 @@ class StudentCollection extends React.Component {
 
     return (
       <section>
+        <NewStudentForm />
+
         <h2 className={header + " " + headerColor}>Students</h2>
         <ul>
           {studentCollection}
