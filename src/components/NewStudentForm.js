@@ -11,13 +11,39 @@ class NewStudentForm extends Component {
     }
   }
 
-  onNameChange = (fishtaco) => {
-    console.log("Name was changed", fishtaco, fishtaco.target);
-    this.setState({fullName: fishtaco.target.value})
-  }
+  // QUESTION:
+  // How to prevent submission if the name field is empty
 
-  onEmailChange = (event) => {
-    this.setState({email: event.target.value})
+  // onNameChange = (fishtaco) => {
+  //   console.log("Name was changed", fishtaco, fishtaco.target);
+  //   this.setState({fullName: fishtaco.target.value})
+  // }
+  //
+  // onEmailChange = (event) => {
+  //   // this.setState({email: event.target.value})
+  //   const newState = {};
+  //
+  //   // Either of these two will work
+  //   newState.email = event.target.value;
+  //   newState['email'] = event.target.value;
+  //
+  //   this.setState(newState);
+  // }
+
+  // QUESTION:
+  // What is in the variables "field" and "value"?
+  // Why do we use subscript notation to set the state?
+  //   What if we said this.setState({field: value}) instead?
+  onInputChange = (event) => {
+    console.log("In on input change");
+
+    const field = event.target.name;
+    const value = event.target.value;
+
+    const newState = {};
+    newState[field] = value;
+    // newState.field = value;  // not the same :(
+    this.setState(newState);
   }
 
   onFormSubmit = (event) => {
@@ -50,7 +76,7 @@ class NewStudentForm extends Component {
             <input
               name="fullName"
               value={this.state.fullName}
-              onChange={this.onNameChange}
+              onChange={this.onInputChange}
               />
           </div>
           <div>
@@ -58,7 +84,7 @@ class NewStudentForm extends Component {
             <input
               name="email"
               value={this.state.email}
-              onChange={this.onEmailChange}
+              onChange={this.onInputChange}
               />
           </div>
           <input
