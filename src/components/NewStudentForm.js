@@ -7,7 +7,8 @@ class NewStudentForm extends Component {
 
     this.state = {
       fullName: "",
-      email: ""
+      email: "",
+      errorMessages: []
     }
   }
 
@@ -49,6 +50,12 @@ class NewStudentForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
 
+    if (!this.emailValid()) {
+      // Maybe display some info to the user?
+      this.setState({errorMessages: [...this.state.errorMessages, "email is invalid"]})
+      return;
+    }
+
     const newStudent = {
       fullName: this.state.fullName,
       email: this.state.email,
@@ -62,11 +69,26 @@ class NewStudentForm extends Component {
     // Now we need to do something with the student...
     console.log("Created a new student:", newStudent);
     this.props.addStudentCallback(newStudent);
+
+    this.setState({errorMessages: []});
+  }
+
+  emailValid = () => {
+    return this.state.email.match(/\S+@\S+/);
   }
 
   render() {
+    const errorMessages = this.state.errorMessages.map((message) => {
+      return <li>{message}</li>;
+    });
+
     return (
       <div>
+        <section className="errors">
+          <ul>
+            {errorMessages}
+          </ul>
+        </section>
         <form
           className="new-student-form"
           onSubmit={this.onFormSubmit}
@@ -85,6 +107,7 @@ class NewStudentForm extends Component {
               name="email"
               value={this.state.email}
               onChange={this.onInputChange}
+              className={this.emailValid() ? 'valid' : 'invalid'}
               />
           </div>
           <input
