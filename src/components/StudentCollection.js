@@ -16,18 +16,15 @@ class StudentCollection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      students: [
-        {
-          fullName: "Ada Lovelace",
-          isPresentToday: true,
-        },
-        {
-          fullName: "Katherine Johnson",
-          email: "kat@nasa.gov",
-          isPresentToday: false,
-        }
-      ]
+      students: [],
     }
+  }
+
+  componentDidMount() {
+    console.log("Did componentDidMount get called?");
+    this.setState({
+      students: fetchStudentData(),
+    });
   }
 
   // We want a callback in the StudentCollection component that fires when "something happened in the Student Component" ... aka "when Student Component says 'I totally clicked the Mark Present Button'"
@@ -77,6 +74,20 @@ class StudentCollection extends React.Component {
     );
   }
 
+}
+
+const fetchStudentData = () => {
+  return [
+    {
+      fullName: "Ada Lovelace",
+      isPresentToday: true,
+    },
+    {
+      fullName: "Katherine Johnson",
+      email: "kat@nasa.gov",
+      isPresentToday: false,
+    }
+  ];
 }
 
 export default StudentCollection;
